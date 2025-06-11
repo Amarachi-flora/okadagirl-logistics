@@ -1,4 +1,4 @@
-# OkadaGirlLogistic Streamlit App
+# OkadaGirlLogistic Streamlit App 
 
 import streamlit as st
 import json
@@ -156,7 +156,17 @@ else:
 # --- Customer Feedback Entry ---
 with st.expander("Add New Delivery Log"):
     customer = st.text_input("Customer Name")
-    destination = st.text_input("Delivery Location (e.g., Ikeja, Lagos)")
+    
+    nigerian_states = [
+        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno",
+        "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa",
+        "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger",
+        "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara",
+        "FCT"
+    ]
+    
+    destination = st.selectbox("Select Delivery State", nigerian_states)
+
     status = st.selectbox("Status", ["delivered", "pending", "not delivered"])
     feedback = st.text_area("Customer Feedback")
 

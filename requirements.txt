@@ -7,3 +7,5 @@ plotly
 xlsxwriter
 pillow
 colorama
+
+
