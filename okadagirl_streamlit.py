@@ -7,7 +7,7 @@ from datetime import datetime
 from textblob import TextBlob
 import pandas as pd
 from geopy.geocoders import Nominatim
-from geopy.exc import GeocoderUnavailable
+from geopy.exc import GeocoderUnavailable, GeocoderRateLimited
 from io import BytesIO
 from PIL import Image
 import plotly.express as px
@@ -64,12 +64,13 @@ def show_summary(logs):
     avg_rating = pd.DataFrame(logs)['rating'].mean() if logs else 0
     return total, delivered, pending, not_delivered, sentiments, avg_rating
 
+@st.cache_data(show_spinner=False)
 def get_coordinates(destination):
     try:
         location = geolocator.geocode(destination + ", Nigeria")
         if location:
             return location.latitude, location.longitude
-    except GeocoderUnavailable:
+    except (GeocoderUnavailable, GeocoderRateLimited):
         return None, None
     return None, None
 
