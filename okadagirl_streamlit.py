@@ -1,4 +1,4 @@
-# OkadaGirlLogistic Streamlit App with Auto-Suggestion for Locations
+# OkadaGirlLogistic Streamlit App
 
 import streamlit as st
 import json
@@ -15,7 +15,7 @@ import plotly.express as px
 LOG_FILE = "delivery_logs.json"
 geolocator = Nominatim(user_agent="okadagirl_app")
 
-# --- Helper functions ---
+# --- Helper Functions ---
 def load_logs():
     if not os.path.exists(LOG_FILE):
         return []
@@ -32,8 +32,7 @@ def analyze_sentiment(feedback):
         return "Positive"
     elif polarity < 0:
         return "Negative"
-    else:
-        return "Neutral"
+    return "Neutral"
 
 def add_log(customer, destination, status, feedback, rating):
     new_log = {
@@ -52,12 +51,7 @@ def add_log(customer, destination, status, feedback, rating):
 
 def filter_logs(logs, keyword):
     keyword = keyword.lower()
-    return [
-        log for log in logs 
-        if keyword in log['customer'].lower() 
-        or keyword in log['date'].lower()
-        or keyword in log['destination'].lower()
-    ]
+    return [log for log in logs if keyword in log['customer'].lower() or keyword in log['date'].lower() or keyword in log['destination'].lower()]
 
 def show_summary(logs):
     total = len(logs)
