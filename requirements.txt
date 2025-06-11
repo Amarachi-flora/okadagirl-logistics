@@ -6,3 +6,4 @@ textblob
 plotly
 xlsxwriter
 pillow
+colorama
